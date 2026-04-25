@@ -1,0 +1,78 @@
+import java.util.Scanner;
+
+// Classe de dados (getters e setters)
+class Contas {
+
+    private double a;
+    private double b;
+    private double c;
+
+    public double getA() { return a; }
+    public void setA(double a) { this.a = a; }
+
+    public double getB() { return b; }
+    public void setB(double b) { this.b = b; }
+
+    public double getC() { return c; }
+    public void setC(double c) { this.c = c; }
+}
+
+// Classe de cálculo
+class Calculo {
+
+    public double[] calcular(Contas conta) {
+
+        double a = conta.getA();
+        double b = conta.getB();
+        double c = conta.getC();
+
+        double delta = (b * b) - (4 * a * c);
+
+        System.out.println("Delta = " + delta);
+
+        double[] resultado = new double[2];
+
+        if (delta >= 0) {
+
+            resultado[0] = (-b + Math.sqrt(delta)) / (2 * a);
+            resultado[1] = (-b - Math.sqrt(delta)) / (2 * a);
+
+        } else {
+
+            System.out.println("Delta negativo - não possui raiz real");
+            return null;
+        }
+
+        return resultado;
+    }
+}
+
+// Classe principal
+public class Main {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        Contas conta = new Contas();
+        Calculo calc = new Calculo();
+
+        System.out.println("Digite A:");
+        conta.setA(sc.nextDouble());
+
+        System.out.println("Digite B:");
+        conta.setB(sc.nextDouble());
+
+        System.out.println("Digite C:");
+        conta.setC(sc.nextDouble());
+
+        double[] res = calc.calcular(conta);
+
+        if (res != null) {
+            System.out.println("X1 = " + res[0]);
+            System.out.println("X2 = " + res[1]);
+        }
+
+        sc.close();
+    }
+}
